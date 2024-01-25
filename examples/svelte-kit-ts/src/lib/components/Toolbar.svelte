@@ -4,10 +4,15 @@
 	import type { UseControlsReturn } from '$lib/use-controls.svelte';
 	import Controls from './Controls.svelte';
 	import { unstate } from 'svelte';
-	import type { useMachine } from '@zag-js/svelte';
+	import type { useMachine, useSnapshot } from '@zag-js/svelte';
 
-	const { controls, machine } = $props<{
+	const {
+		controls,
+		machine,
+		state: machineState
+	} = $props<{
 		machine: ReturnType<typeof useMachine<any, any, any>>;
+		state: ReturnType<typeof useSnapshot>['state'];
 		controls?: UseControlsReturn;
 	}>();
 
@@ -31,7 +36,7 @@
 			<pre>
         <details open>
           <summary>Visualizer</summary>
-          <div>{@html stringifyState(unstate(machine.state))}</div>
+          <div>{@html stringifyState(unstate(machineState))}</div>
         </details>
       </pre>
 		</div>

@@ -37,4 +37,4 @@
 	</div>
 </main>
 
-<Toolbar {controls} {machine} />
+<Toolbar {controls} {machine} state={machine.state} />
